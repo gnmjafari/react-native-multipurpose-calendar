@@ -18,7 +18,7 @@
     "url": "git+https://github.com/gnmjafari/react-native-multipurpose-calendar.git"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "*"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
