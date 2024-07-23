@@ -1,0 +1,27 @@
+{
+  "name": "react-native-react-native-multipurpose-calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "android",
+    "ios"
+  ],
+  "author": "gnmjafari <gnm.jafaria@gmail.com> (https://github.com/gnmjafari)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnmjafari/react-native-multipurpose-calendar.git"
+  },
+  "peerDependencies": {
+    "react-native": "^0.41.2"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^14.0.2",
+    "moment-jalaali": "^0.10.1"
+  }
+}
