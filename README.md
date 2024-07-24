@@ -83,4 +83,4 @@ export default App;
 
 ### Calendar Demo => fa
 
-  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-fa.gif?raw=true">
+  <img height={50} src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-fa.gif?raw=true">
