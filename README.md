@@ -85,6 +85,18 @@ export default App;
 
   <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-fa.gif?raw=true" style="width: 30%; height: auto;">
 
-### Calendar Demo : fa (english)
+### Calendar Demo : en (english)
 
   <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-en.gif?raw=true" style="width: 30%; height: auto;">
+
+### Calendar Demo light
+
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-light.gif?raw=true" style="width: 30%; height: auto;">
+
+### Calendar Demo today button
+
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-today-btn.gif?raw=true" style="width: 30%; height: auto;">
+
+### Calendar Demo render icon
+
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-icon.gif?raw=true" style="width: 30%; height: auto;">
