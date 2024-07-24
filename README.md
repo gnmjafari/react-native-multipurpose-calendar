@@ -100,3 +100,7 @@ export default App;
 ### Calendar Demo render icon
 
   <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-icon.gif?raw=true" style="width: 30%; height: auto;">
+
+## License
+
+React native multipurpose calendar is MIT licensed
