@@ -1,5 +1,7 @@
 # react-native-multipurpose-calendar
 
+[![NPM](https://img.shields.io/npm/v/moment-jalaali.svg)](https://www.npmjs.com/package/react-native-multipurpose-calendars)
+
 ## Getting started
 
 `npm install react-native-multipurpose-calendar --save`
@@ -79,14 +81,14 @@ export default App;
 
 ### Options
 
-| Param            | Type     | Default   | Description                               | Example                  |
-| ---------------- | -------  | -------   | ----------------------------------------  | ------------------------ |
-| lang             | String   |   `en`    | Available values = `en`, `fa`             | `lang="en"`              |
-| themeMode        | String   |  `dark`   | Available values = `dark`, `light`        | `themeMode="light"`      |
-| render           | String   |  `input`  | Available values = `input`, `icon`        | `render="icon"`          |
-| showTodayButton  | Boolean  |  `false`  | Back to today's date                      | `showTodayButton={true}` |
-| value            | String   |   `""`    | selected date `"YYYY-MM-DD"`              | `value={selectedDate}`   |
-| onPress          | Function |`undefined`| ()=>{}                                    | `(date_1, date_2)=>{}`   |
+| Param           | Type     | Default     | Description                        | Example                  |
+| --------------- | -------- | ----------- | ---------------------------------- | ------------------------ |
+| lang            | String   | `en`        | Available values = `en`, `fa`      | `lang="en"`              |
+| themeMode       | String   | `dark`      | Available values = `dark`, `light` | `themeMode="light"`      |
+| render          | String   | `input`     | Available values = `input`, `icon` | `render="icon"`          |
+| showTodayButton | Boolean  | `false`     | Back to today's date               | `showTodayButton={true}` |
+| value           | String   | `""`        | selected date `"YYYY-MM-DD"`       | `value={selectedDate}`   |
+| onPress         | Function | `undefined` | ()=>{}                             | `(date_1, date_2)=>{}`   |
 
 ### Calendar Demo : fa (persian)
 
