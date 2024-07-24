@@ -1,7 +1,5 @@
 # react-native-multipurpose-calendar
 
-[![NPM](https://img.shields.io/npm/v/moment-jalaali.svg)](https://www.npmjs.com/package/react-native-multipurpose-calendars)
-
 ## Getting started
 
 `npm install react-native-multipurpose-calendar --save`
