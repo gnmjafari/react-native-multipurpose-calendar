@@ -2,11 +2,7 @@
 
 ## Getting started
 
-`$ npm install react-native-multipurpose-calendar --save`
-
-### Mostly automatic installation
-
-`$ react-native link react-native-multipurpose-calendar`
+`npm install react-native-multipurpose-calendar --save`
 
 ## Usage
 
@@ -37,7 +33,7 @@ const App = () => {
   return (
     <Calendar
       lang="fa" // fa || en
-      themeMode="light" // light || dark
+      themeMode="dark" // light || dark
       value={value}
       onPress={(fa, en) => {
         // fa => example => "1402-04-11"
@@ -65,7 +61,7 @@ const App = () => {
   return (
     <Calendar
       lang="en" // fa || en
-      themeMode="light" // light || dark
+      themeMode="dark" // light || dark
       value={value}
       onPress={(en, fa) => {
         // en => example => "2021-06-24"
@@ -89,7 +85,7 @@ export default App;
 | themeMode        | String   |  `dark`   | Available values = `dark`, `light`        | `themeMode="light"`      |
 | render           | String   |  `input`  | Available values = `input`, `icon`        | `render="icon"`          |
 | showTodayButton  | Boolean  |  `false`  | Back to today's date                      | `showTodayButton={true}` |
-| value            | String   |   `""`    | selected date                             | `value={selectedDate}`   |
+| value            | String   |   `""`    | selected date `"YYYY-MM-DD"`              | `value={selectedDate}`   |
 | onPress          | Function |`undefined`| ()=>{}                                    | `(date_1, date_2)=>{}`   |
 
 ### Calendar Demo : fa (persian)

@@ -11,8 +11,8 @@ import {
 } from "react-native";
 
 const Calendar = ({
-  lang = "fa", // 'en' || 'fa'
-  themeMode = "light", // 'dark' || 'light'
+  lang = "en", // 'en' || 'fa'
+  themeMode = "dark", // 'dark' || 'light'
   value, // string => format => 'YYYY-MM-DD' || 'jYYYY-jMM-jDD'
   onPress, // function
   showTodayButton = false, // boolean
