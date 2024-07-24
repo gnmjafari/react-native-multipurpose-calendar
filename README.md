@@ -81,6 +81,17 @@ const App = () => {
 export default App;
 ```
 
+### Options
+
+| Param            | Type     | Default   | Description                               | Example                  |
+| ---------------- | -------  | -------   | ----------------------------------------  | ------------------------ |
+| lang             | String   |   `en`    | Available values = `en`, `fa`             | `lang="en"`              |
+| themeMode        | String   |  `dark`   | Available values = `dark`, `light`        | `themeMode="light"`      |
+| render           | String   |  `input`  | Available values = `input`, `icon`        | `render="icon"`          |
+| showTodayButton  | Boolean  |  `false`  | Back to today's date                      | `showTodayButton={true}` |
+| value            | String   |   `""`    | selected date                             | `value={selectedDate}`   |
+| onPress          | Function |`undefined`| ()=>{}                                    | `(date_1, date_2)=>{}`   |
+
 ### Calendar Demo : fa (persian)
 
   <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-fa.gif?raw=true" style="width: 30%; height: auto;">
