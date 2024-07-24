@@ -81,6 +81,10 @@ const App = () => {
 export default App;
 ```
 
-### Calendar Demo => fa
+### Calendar Demo : fa (persian)
 
   <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-fa.gif?raw=true" style="width: 30%; height: auto;">
+
+### Calendar Demo : fa (english)
+
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-en.gif?raw=true" style="width: 30%; height: auto;">
