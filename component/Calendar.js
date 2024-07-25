@@ -56,7 +56,7 @@ const Calendar = ({
       marginVertical: 10,
       paddingTop: 20,
       paddingBottom: 10,
-
+      zIndex: 2000,
       shadowColor: "#000000",
 
       shadowOffset: {
