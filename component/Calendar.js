@@ -21,7 +21,7 @@ const Calendar = ({
   title,
 }) => {
   moment.locale(lang);
-  const theme = {
+  const themeCalendar = {
     dark: {
       background: theme?.dark?.background || "rgb(29, 27, 30)",
       onBackground: theme?.dark?.onBackground || "rgb(231, 225, 229)",
@@ -48,7 +48,7 @@ const Calendar = ({
   };
   const styles = StyleSheet.create({
     mainContainer: {
-      backgroundColor: theme[themeMode].background,
+      backgroundColor: themeCalendar[themeMode].background,
       minWidth: 330,
       maxWidth: 330,
       width: "100%",
@@ -72,14 +72,14 @@ const Calendar = ({
       justifyContent: "center",
       alignItems: "center",
       height: 50,
-      color: theme[themeMode].onBackground,
+      color: themeCalendar[themeMode].onBackground,
     },
     item: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
       height: 50,
-      color: theme[themeMode].onBackground,
+      color: themeCalendar[themeMode].onBackground,
     },
   });
 
@@ -265,17 +265,17 @@ const Calendar = ({
             borderRadius: 50,
             padding: 5,
             color: today
-              ? theme[themeMode].todayColor
+              ? themeCalendar[themeMode].todayColor
               : selectedValueWithUser
-              ? theme[themeMode].selectedDateColor
+              ? themeCalendar[themeMode].selectedDateColor
               : disable
-              ? theme[themeMode].disable
-              : theme[themeMode].onBackground,
+              ? themeCalendar[themeMode].disable
+              : themeCalendar[themeMode].onBackground,
             backgroundColor: today
-              ? theme[themeMode].todayBgColor
+              ? themeCalendar[themeMode].todayBgColor
               : selectedValueWithUser
-              ? theme[themeMode].selectedDateBgColor
-              : theme[themeMode].background,
+              ? themeCalendar[themeMode].selectedDateBgColor
+              : themeCalendar[themeMode].background,
           }}
           onPress={() => {
             setCalendarValue(
@@ -304,7 +304,7 @@ const Calendar = ({
     const displayItem = item.length > 4 ? `${item.slice(0, 4)}...` : item;
     return (
       <View style={styles.itemHeader} key={`renderHeaderItem_${index}`}>
-        <Text style={{ color: theme[themeMode].onBackground }}>
+        <Text style={{ color: themeCalendar[themeMode].onBackground }}>
           {displayItem}
         </Text>
       </View>
@@ -318,8 +318,8 @@ const Calendar = ({
           style={{
             borderRadius: 5,
             borderWidth: 1,
-            borderColor: theme[themeMode].borderColor,
-            backgroundColor: theme[themeMode].background,
+            borderColor: themeCalendar[themeMode].borderColor,
+            backgroundColor: themeCalendar[themeMode].background,
             paddingHorizontal: 10,
             paddingVertical: 10,
             flexDirection: "row",
@@ -333,13 +333,13 @@ const Calendar = ({
           <AntDesign
             name="calendar"
             size={25}
-            color={theme[themeMode].onBackground}
+            color={themeCalendar[themeMode].onBackground}
           />
           {title && (
             <Text
               style={{
                 marginHorizontal: 10,
-                color: theme[themeMode].onBackground,
+                color: themeCalendar[themeMode].onBackground,
               }}
             >
               {title}
@@ -348,7 +348,7 @@ const Calendar = ({
           <Text
             style={{
               marginHorizontal: 10,
-              color: theme[themeMode].onBackground,
+              color: themeCalendar[themeMode].onBackground,
             }}
           >
             {calendarValue}
@@ -357,7 +357,7 @@ const Calendar = ({
       ) : (
         <TouchableOpacity
           style={{
-            backgroundColor: theme[themeMode].background,
+            backgroundColor: themeCalendar[themeMode].background,
             paddingHorizontal: 10,
             paddingVertical: 5,
             flexDirection: "row",
@@ -371,7 +371,7 @@ const Calendar = ({
           <AntDesign
             name="calendar"
             size={30}
-            color={theme[themeMode].onBackground}
+            color={themeCalendar[themeMode].onBackground}
           />
         </TouchableOpacity>
       )}
@@ -392,7 +392,7 @@ const Calendar = ({
               }}
             >
               <AntDesign
-                style={{ color: theme[themeMode].onBackground }}
+                style={{ color: themeCalendar[themeMode].onBackground }}
                 name="closecircleo"
                 size={24}
                 color="black"
@@ -405,13 +405,13 @@ const Calendar = ({
                   paddingVertical: 5,
                   borderRadius: 5,
                   borderWidth: 1,
-                  borderColor: theme[themeMode].borderColor,
+                  borderColor: themeCalendar[themeMode].borderColor,
                 }}
                 onPress={() => {
                   setSelectedDate(moment().format(setFormat()));
                 }}
               >
-                <Text style={{ color: theme[themeMode].onBackground }}>
+                <Text style={{ color: themeCalendar[themeMode].onBackground }}>
                   {lang == "fa" ? "امروز" : "today"}
                 </Text>
               </TouchableOpacity>
@@ -448,7 +448,7 @@ const Calendar = ({
               <MaterialIcons
                 name="arrow-back-ios"
                 size={24}
-                color={theme[themeMode].onBackground}
+                color={themeCalendar[themeMode].onBackground}
               />
             </TouchableOpacity>
             <View
@@ -456,10 +456,10 @@ const Calendar = ({
                 flexDirection: "row",
                 gap: 5,
                 flexDirection: lang === "en" ? "row" : "row-reverse",
-                color: theme[themeMode].onBackground,
+                color: themeCalendar[themeMode].onBackground,
               }}
             >
-              <Text style={{ color: theme[themeMode].onBackground }}>
+              <Text style={{ color: themeCalendar[themeMode].onBackground }}>
                 {
                   useLocales[lang].monthNames[
                     moment(selectedDate, setFormat()).format(
@@ -468,7 +468,7 @@ const Calendar = ({
                   ]
                 }
               </Text>
-              <Text style={{ color: theme[themeMode].onBackground }}>
+              <Text style={{ color: themeCalendar[themeMode].onBackground }}>
                 {moment(selectedDate, setFormat()).format(
                   lang === "fa" ? "jYYYY" : "YYYY"
                 )}
@@ -499,7 +499,7 @@ const Calendar = ({
               <MaterialIcons
                 name="arrow-forward-ios"
                 size={24}
-                color={theme[themeMode].onBackground}
+                color={themeCalendar[themeMode].onBackground}
               />
             </TouchableOpacity>
           </View>
