@@ -19,6 +19,7 @@ import { calendar } from "react-native-multipurpose-calendar";
   showTodayButton // boolean
   render //string => 'icon' || 'input'
   theme
+  title // string
 />
 ```
 
@@ -35,6 +36,7 @@ const App = () => {
     <Calendar
       lang="fa" // fa || en
       themeMode="dark" // light || dark
+      title="date" // string
       value={value}
       onPress={(fa, en) => {
         // fa => example => "1402-04-11"
@@ -63,6 +65,7 @@ const App = () => {
     <Calendar
       lang="en" // fa || en
       themeMode="dark" // light || dark
+      title="date" // string
       value={value}
       onPress={(en, fa) => {
         // en => example => "2021-06-24"
@@ -91,6 +94,7 @@ const App = () => {
     <Calendar
       lang="fa" // fa || en
       themeMode="dark" // light || dark
+      title='date' // string
       value={value}
       onPress={(fa, en) => {
         // fa => example => "1402-04-11"
@@ -133,6 +137,7 @@ export default App;
 | Param           | Type     | Default     | Description                        | Example                  |
 | --------------- | -------- | ----------- | ---------------------------------- | ------------------------ |
 | lang            | String   | `en`        | Available values = `en`, `fa`      | `lang="en"`              |
+| title           | String   | `undefined` |                                    | `title="date"`           |
 | themeMode       | String   | `dark`      | Available values = `dark`, `light` | `themeMode="light"`      |
 | render          | String   | `input`     | Available values = `input`, `icon` | `render="icon"`          |
 | showTodayButton | Boolean  | `false`     | Back to today's date               | `showTodayButton={true}` |
