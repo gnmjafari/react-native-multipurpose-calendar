@@ -17,28 +17,32 @@ const Calendar = ({
   onPress, // function
   showTodayButton = false, // boolean
   render = "input", // 'icon' || 'input'
+  theme,
 }) => {
   moment.locale(lang);
   const theme = {
     dark: {
-      background: "rgb(29, 27, 30)",
-      onBackground: "rgb(231, 225, 229)",
-      disable: "rgb(74, 69, 78)",
-      primary: "rgb(220, 184, 255)",
-      onPrimary: "rgb(71, 12, 122)",
-      secondary: "rgb(208, 193, 218)",
-      onSecondary: "rgb(54, 44, 63)",
-      borderColor: "rgb(150, 142, 152)",
+      background: theme?.dark?.background || "rgb(29, 27, 30)",
+      onBackground: theme?.dark?.onBackground || "rgb(231, 225, 229)",
+      disable: theme?.dark?.disable || "rgb(74, 69, 78)",
+      selectedDateBgColor:
+        theme?.dark?.selectedDateBgColor || "rgb(220, 184, 255)",
+      selectedDateColor: theme?.dark?.selectedDateColor || "rgb(71, 12, 122)",
+      todayBgColor: theme?.dark?.todayBgColor || "rgb(208, 193, 218)",
+      todayColor: theme?.dark?.todayColor || "rgb(54, 44, 63)",
+      borderColor: theme?.dark?.borderColor || "rgb(150, 142, 152)",
     },
     light: {
-      background: "rgb(255, 251, 255)",
-      onBackground: "rgb(29, 27, 30)",
-      disable: "rgb(233, 223, 235)",
-      primary: "rgb(120, 69, 172)",
-      onPrimary: "rgb(255, 255, 255)",
-      secondary: "rgb(102, 90, 111)",
-      onSecondary: "rgb(255, 255, 255)",
-      borderColor: "rgb(124, 117, 126)",
+      background: theme?.light?.background || "rgb(255, 251, 255)",
+      onBackground: theme?.light?.onBackground || "rgb(29, 27, 30)",
+      disable: theme?.light?.disable || "rgb(233, 223, 235)",
+      selectedDateBgColor:
+        theme?.light?.selectedDateBgColor || "rgb(120, 69, 172)",
+      selectedDateColor:
+        theme?.light?.selectedDateColor || "rgb(255, 255, 255)",
+      todayBgColor: theme?.light?.todayBgColor || "rgb(102, 90, 111)",
+      todayColor: theme?.light?.todayColor || "rgb(255, 255, 255)",
+      borderColor: theme?.light?.borderColor || "rgb(124, 117, 126)",
     },
   };
   const styles = StyleSheet.create({
@@ -260,16 +264,16 @@ const Calendar = ({
             borderRadius: 50,
             padding: 5,
             color: today
-              ? theme[themeMode].onSecondary
+              ? theme[themeMode].todayColor
               : selectedValueWithUser
-              ? theme[themeMode].onPrimary
+              ? theme[themeMode].selectedDateColor
               : disable
               ? theme[themeMode].disable
               : theme[themeMode].onBackground,
             backgroundColor: today
-              ? theme[themeMode].secondary
+              ? theme[themeMode].todayBgColor
               : selectedValueWithUser
-              ? theme[themeMode].primary
+              ? theme[themeMode].selectedDateBgColor
               : theme[themeMode].background,
           }}
           onPress={() => {
