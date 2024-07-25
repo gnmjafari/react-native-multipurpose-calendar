@@ -9,7 +9,9 @@
   "keywords": [
     "react-native",
     "android",
-    "ios"
+    "ios",
+    "persian-calendar",
+    "calendar"
   ],
   "author": "gnmjafari <gnm.jafaria@gmail.com> (https://github.com/gnmjafari)",
   "license": "MIT",
@@ -17,6 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/gnmjafari/react-native-multipurpose-calendar.git"
   },
+  "homepage": "https://github.com/gnmjafari/#readme",
   "peerDependencies": {
     "react-native": "*"
   },

@@ -146,19 +146,19 @@ export default App;
 
 ### Calendar Demo : en (english)
 
-  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-en.gif?raw=true" style="max-width: 300px; width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-en.gif?raw=true" style=" width: 300px; height: auto;">
 
 ### Calendar Demo light
 
-  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-light.gif?raw=true" style="max-width: 300px; width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-light.gif?raw=true" style=" width: 300px; height: auto;">
 
 ### Calendar Demo today button
 
-  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-today-btn.gif?raw=true" style="max-width: 300px; width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-today-btn.gif?raw=true" style="width: 300px; height: auto;">
 
 ### Calendar Demo render icon
 
-  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-icon.gif?raw=true" style="max-width: 300px; width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-icon.gif?raw=true" style="width: 300px; height: auto;">
 
 ## License
 
