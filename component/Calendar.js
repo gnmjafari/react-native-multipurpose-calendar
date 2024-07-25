@@ -18,6 +18,7 @@ const Calendar = ({
   showTodayButton = false, // boolean
   render = "input", // 'icon' || 'input'
   theme,
+  title,
 }) => {
   moment.locale(lang);
   const theme = {
@@ -334,6 +335,16 @@ const Calendar = ({
             size={25}
             color={theme[themeMode].onBackground}
           />
+          {title && (
+            <Text
+              style={{
+                marginHorizontal: 10,
+                color: theme[themeMode].onBackground,
+              }}
+            >
+              {title}
+            </Text>
+          )}
           <Text
             style={{
               marginHorizontal: 10,
