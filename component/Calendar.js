@@ -284,14 +284,10 @@ const Calendar = ({
               )
             );
             if (onPress) {
-              onPress(
-                moment(item.dateString).format(
-                  lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD"
-                ),
-                moment(item.dateString).format(
-                  lang != "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD"
-                )
-              );
+              onPress({
+                en: moment(item.dateString).format("YYYY-MM-DD"),
+                fa: moment(item.dateString).format("jYYYY-jMM-jDD"),
+              });
             }
           }}
         >
