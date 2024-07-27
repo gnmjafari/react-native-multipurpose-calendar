@@ -8,9 +8,16 @@ import {
   FlatList,
   StatusBar,
 } from "react-native";
-import Calendar from "./Calendar";
+import _ from "lodash";
 
-const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
+const Agenda = ({
+  lang = "en",
+  themeMode = "dark",
+  theme,
+  events,
+  fontFamily,
+  renderItemCustom,
+}) => {
   moment.locale(lang);
   if (lang == "fa") {
     moment.loadPersian({ dialect: "persian-modern" });
@@ -27,25 +34,24 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
     dark: {
       background: theme?.dark?.background || "rgb(29, 27, 30)",
       onBackground: theme?.dark?.onBackground || "rgb(231, 225, 229)",
-      disable: theme?.dark?.disable || "rgb(74, 69, 78)",
-      selectedDateBgColor:
-        theme?.dark?.selectedDateBgColor || "rgb(220, 184, 255)",
-      selectedDateColor: theme?.dark?.selectedDateColor || "rgb(71, 12, 122)",
-      todayBgColor: theme?.dark?.todayBgColor || "rgb(208, 193, 218)",
-      todayColor: theme?.dark?.todayColor || "rgb(54, 44, 63)",
-      borderColor: theme?.dark?.borderColor || "rgb(150, 142, 152)",
+      itemBgColor: theme?.dark?.itemBgColor || "rgb(220, 184, 255)",
+      itemTextColor: theme?.dark?.itemTextColor || "rgb(71, 12, 122)",
+      dayTextColor: theme?.dark?.dayTextColor || "rgb(231, 225, 229)",
+      buttonBgColor: theme?.dark?.buttonBgColor || "rgb(77, 67, 87)",
+      buttonTextColor: theme?.dark?.buttonTextColor || "rgb(237, 221, 246)",
+      todayTextColor: theme?.dark?.todayTextColor || "rgb(220, 184, 255)",
+      line: "rgb(74, 69, 78)",
     },
     light: {
       background: theme?.light?.background || "rgb(255, 251, 255)",
       onBackground: theme?.light?.onBackground || "rgb(29, 27, 30)",
-      disable: theme?.light?.disable || "rgb(233, 223, 235)",
-      selectedDateBgColor:
-        theme?.light?.selectedDateBgColor || "rgb(120, 69, 172)",
-      selectedDateColor:
-        theme?.light?.selectedDateColor || "rgb(255, 255, 255)",
-      todayBgColor: theme?.light?.todayBgColor || "rgb(102, 90, 111)",
-      todayColor: theme?.light?.todayColor || "rgb(255, 255, 255)",
-      borderColor: theme?.light?.borderColor || "rgb(124, 117, 126)",
+      itemBgColor: theme?.dark?.itemBgColor || "rgb(120, 69, 172)",
+      itemTextColor: theme?.dark?.itemTextColor || "rgb(231, 225, 229)",
+      dayTextColor: theme?.dark?.dayTextColor || "#0D1B2A",
+      buttonBgColor: theme?.dark?.buttonBgColor || "rgb(237, 221, 246)",
+      buttonTextColor: theme?.dark?.buttonTextColor || "rgb(33, 24, 42)",
+      todayTextColor: theme?.dark?.todayTextColor || "rgb(120, 69, 172)",
+      line: "rgb(233, 223, 235)",
     },
   };
 
@@ -63,13 +69,18 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      gap: 10,
+      gap: 5,
     },
     headerBtn: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
       gap: 10,
+    },
+    container: {
+      backgroundColor: themeCalendar[themeMode].background,
+      paddingTop: 30,
+      paddingBottom: 70,
     },
   });
 
@@ -87,7 +98,6 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
     const endDate = moment(date)
       .endOf(lang == "fa" ? "jMonth" : "month")
       .format("YYYY-MM-DD");
-    console.log("startDate", startDate);
 
     const timeDifference =
       new Date(startDate).getTime() - new Date(endDate).getTime();
@@ -97,36 +107,33 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
     const daysArray = [];
 
     for (let i = 0; i < 32; i += 1) {
+      const dateAdd = moment(startDate).add(i, "day").format("YYYY-MM-DD");
+      const filterEvents = _.filter(
+        events,
+        (item) =>
+          item.date == dateAdd && {
+            ...item,
+            child_id: `child_id_${i}_${item.id}`,
+          }
+      );
+
       daysArray.push({
         agenda_id: `agenda_id_${i}`,
         dateString: moment(startDate).add(i, "day").format("YYYY-MM-DD"),
         month: moment(startDate).add(i, "day").format("MM"),
         day: moment(startDate).add(i, "day").format("DD"),
         year: moment(startDate).add(i, "day").format("YYYY"),
-        child: [
-          { child_id: `agenda_child_${i}_1`, title: "test 1" },
-          { child_id: `agenda_child_${i}_2`, title: "test 2" },
-          { child_id: `agenda_child_${i}_3`, title: "test 3" },
-          { child_id: `agenda_child_${i}_4`, title: "test 4" },
-        ],
+        child: filterEvents,
       });
     }
 
     return daysArray;
   };
 
-  const events = {
-    "2024-07-25": [
-      { date: "2024-07-25", title: "test 1" },
-      { date: "2024-07-25", title: "test 2" },
-    ],
-    "2024-07-26": [
-      { date: "2024-07-26", title: "test 3" },
-      { date: "2024-07-26", title: "test 4" },
-    ],
-  };
-
   const renderItem = ({ item, index }) => {
+    if (renderItemCustom != undefined) {
+      return renderItemCustom({ item, index });
+    }
     return (
       <View
         key={`renderItem_${index}`}
@@ -134,15 +141,16 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
           width: "100%",
           height: "auto",
           marginBottom: 10,
-          backgroundColor: "#212529",
+          backgroundColor: themeCalendar[themeMode].itemBgColor,
           padding: 10,
-          borderRadius: 5,
+          borderRadius: 10,
         }}
       >
         <Text
           style={{
-            color: themeCalendar[themeMode].onBackground,
+            color: themeCalendar[themeMode].itemTextColor,
             fontSize: 18,
+            fontFamily: fontFamily,
           }}
         >
           {item.title}
@@ -152,10 +160,13 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
   };
 
   const renderDay = ({ item, index }) => {
+    const today =
+      moment(item.dateString).format(
+        lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD"
+      ) == moment().format(setFormat());
     return (
-      <View>
+      <View key={`renderDay_${index}`}>
         <View
-          key={`renderDay_${index}`}
           style={{
             width: "100%",
             marginTop: 20,
@@ -174,16 +185,22 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
           >
             <Text
               style={{
-                color: "#696969",
+                color: today
+                  ? themeCalendar[themeMode].todayTextColor
+                  : themeCalendar[themeMode].dayTextColor,
                 fontSize: 40,
+                fontFamily: fontFamily,
               }}
             >
               {moment(item.dateString).format(lang == "fa" ? "jD" : "D")}
             </Text>
             <Text
               style={{
-                color: "#696969",
+                color: today
+                  ? themeCalendar[themeMode].todayTextColor
+                  : themeCalendar[themeMode].dayTextColor,
                 fontSize: 25,
+                fontFamily: fontFamily,
               }}
             >
               {moment(item.dateString).format(lang == "fa" ? "dddd" : "ddd")}
@@ -200,7 +217,7 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
         </View>
         <View
           style={{
-            backgroundColor: "#343a40",
+            backgroundColor: themeCalendar[themeMode].line,
             // width: "100%",
             height: 2,
             marginVertical: 5,
@@ -212,7 +229,7 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <StatusBar />
       <View style={styles.headerContainer}>
         <View>
@@ -234,7 +251,8 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
             style={{
               color: themeCalendar[themeMode].onBackground,
               fontSize: 20,
-              marginLeft: 30,
+              marginLeft: 40,
+              fontFamily: fontFamily,
             }}
           >
             {moment(selectedDate, setFormat()).format(
@@ -248,8 +266,7 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
               paddingHorizontal: 15,
               paddingVertical: 5,
               borderRadius: 5,
-              borderWidth: 1,
-              borderColor: themeCalendar[themeMode].borderColor,
+              backgroundColor: themeCalendar[themeMode].buttonBgColor,
             }}
             onPress={() => {
               const date = moment(selectedDate, setFormat()).format(
@@ -266,7 +283,12 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
               );
             }}
           >
-            <Text style={{ color: themeCalendar[themeMode].onBackground }}>
+            <Text
+              style={{
+                color: themeCalendar[themeMode].buttonTextColor,
+                fontFamily: fontFamily,
+              }}
+            >
               {lang == "fa" ? "قبل" : "Prev"}
             </Text>
           </TouchableOpacity>
@@ -275,14 +297,18 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
               paddingHorizontal: 15,
               paddingVertical: 5,
               borderRadius: 5,
-              borderWidth: 1,
-              borderColor: themeCalendar[themeMode].borderColor,
+              backgroundColor: themeCalendar[themeMode].buttonBgColor,
             }}
             onPress={() => {
               setSelectedDate(moment().format(setFormat()));
             }}
           >
-            <Text style={{ color: themeCalendar[themeMode].onBackground }}>
+            <Text
+              style={{
+                color: themeCalendar[themeMode].buttonTextColor,
+                fontFamily: fontFamily,
+              }}
+            >
               {lang == "fa" ? "امروز" : "today"}
             </Text>
           </TouchableOpacity>
@@ -291,8 +317,7 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
               paddingHorizontal: 15,
               paddingVertical: 5,
               borderRadius: 5,
-              borderWidth: 1,
-              borderColor: themeCalendar[themeMode].borderColor,
+              backgroundColor: themeCalendar[themeMode].buttonBgColor,
             }}
             onPress={() => {
               const date = moment(selectedDate, setFormat()).format(
@@ -311,7 +336,12 @@ const Agenda = ({ lang = "en", themeMode = "dark", theme }) => {
               );
             }}
           >
-            <Text style={{ color: themeCalendar[themeMode].onBackground }}>
+            <Text
+              style={{
+                color: themeCalendar[themeMode].buttonTextColor,
+                fontFamily: fontFamily,
+              }}
+            >
               {lang == "fa" ? "بعد" : "Next"}
             </Text>
           </TouchableOpacity>
