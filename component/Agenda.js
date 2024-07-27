@@ -8,6 +8,7 @@ import {
   FlatList,
   StatusBar,
 } from "react-native";
+import Calendar from "./Calendar";
 import _ from "lodash";
 
 const Agenda = ({
