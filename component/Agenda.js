@@ -79,6 +79,8 @@ const Agenda = ({
       gap: 10,
     },
     container: {
+      // flex: 1,
+      justifyContent: "flex-start",
       backgroundColor: themeCalendar[themeMode].background,
       paddingTop: 30,
       paddingBottom: 70,
@@ -210,7 +212,7 @@ const Agenda = ({
           <FlatList
             data={item.child}
             renderItem={renderItem}
-            keyExtractor={(item) => item.child_id}
+            keyExtractor={(item) => `${item.agenda_id}_renderItem`}
             numColumns={1}
             contentContainerStyle={{ width: "100%" }}
             style={{ width: "70%" }}
