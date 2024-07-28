@@ -249,8 +249,9 @@ const Calendar = ({
       moment(selectedDate, setFormat()).format(lang == "fa" ? "jMM" : "MM");
 
     const today =
-      moment(item.dateString).format(lang == "fa" ? "jMM-DD" : "MM-DD") ==
-      moment().format(lang == "fa" ? "jMM-jDD" : "MM-DD");
+      moment(item.dateString).format(
+        lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD"
+      ) == moment().format(setFormat());
 
     const selectedValueWithUser =
       calendarValue ==
