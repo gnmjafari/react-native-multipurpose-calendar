@@ -15,7 +15,7 @@ const Agenda = ({
   lang = "en",
   themeMode = "dark",
   theme,
-  events,
+  events = [],
   fontFamily,
   renderItemCustom,
 }) => {
