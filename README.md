@@ -4,26 +4,17 @@
 
 `npm install react-native-multipurpose-calendar --save`
 
-## Usage
+## Usage Calendar
 
 ```javascript
 import { calendar } from "react-native-multipurpose-calendar";
 ```
 
 ```javascript
-<Calendar
-  lang // string => 'en' || 'fa'
-  themeMode // string => 'dark' || 'light'
-  value // string => format => 'YYYY-MM-DD' || 'jYYYY-jMM-jDD'
-  onPress // function()
-  showTodayButton // boolean
-  render //string => 'icon' || 'input'
-  theme
-  title // string
-/>
+<Calendar lang themeMode value onPress showTodayButton render theme title />
 ```
 
-## Some Code Examples lang = 'fa'
+## Some Code Examples Calendar lang = 'fa'
 
 ```javascript
 import React, { useState } from "react";
@@ -34,17 +25,15 @@ const App = () => {
 
   return (
     <Calendar
-      lang="fa" // fa || en
-      themeMode="dark" // light || dark
-      title="date" // string
+      lang="fa"
+      themeMode="dark"
+      title="date"
       value={value}
-      onPress={(fa, en) => {
-        // fa => example => "1402-04-11"
-        // en => example => "2021-06-24"
+      onPress={({ en, fa }) => {
         setValue(fa);
       }}
-      showTodayButton // boolean
-      render="input" // 'input' || 'icon'
+      showTodayButton
+      render="input"
     />
   );
 };
@@ -52,7 +41,7 @@ const App = () => {
 export default App;
 ```
 
-## Some Code Examples lang = 'en'
+## Some Code Examples Calendar lang = 'en'
 
 ```javascript
 import React, { useState } from "react";
@@ -63,17 +52,15 @@ const App = () => {
 
   return (
     <Calendar
-      lang="en" // fa || en
-      themeMode="dark" // light || dark
-      title="date" // string
+      lang="en"
+      themeMode="dark"
+      title="date"
       value={value}
-      onPress={(en, fa) => {
-        // en => example => "2021-06-24"
-        // fa => example => "1402-04-11"
+      onPress={({ en, fa }) => {
         setValue(en);
       }}
-      showTodayButton // boolean
-      render="input" // 'input' || 'icon'
+      showTodayButton
+      render="input"
     />
   );
 };
@@ -81,7 +68,7 @@ const App = () => {
 export default App;
 ```
 
-## Some Code Examples Theme
+## Some Code Examples Calendar Theme
 
 ```javascript
 import React, { useState } from "react";
@@ -92,17 +79,15 @@ const App = () => {
 
   return (
     <Calendar
-      lang="fa" // fa || en
-      themeMode="dark" // light || dark
-      title='date' // string
+      lang="fa"
+      themeMode="dark"
+      title='date'
       value={value}
-      onPress={(fa, en) => {
-        // fa => example => "1402-04-11"
-        // en => example => "2021-06-24"
+      onPress={({fa, en}) => {
         setValue(fa);
       }}
-      showTodayButton // boolean
-      render="input" // 'input' || 'icon'
+      showTodayButton
+      render="input"
       theme={
             dark: {
               background: "rgb(29, 27, 30)",
@@ -132,7 +117,7 @@ const App = () => {
 export default App;
 ```
 
-### Options
+### Options Calendar
 
 | Param           | Type     | Default     | Description                        | Example                  |
 | --------------- | -------- | ----------- | ---------------------------------- | ------------------------ |
@@ -142,7 +127,7 @@ export default App;
 | render          | String   | `input`     | Available values = `input`, `icon` | `render="icon"`          |
 | showTodayButton | Boolean  | `false`     | Back to today's date               | `showTodayButton={true}` |
 | value           | String   | `""`        | selected date `"YYYY-MM-DD"`       | `value={selectedDate}`   |
-| onPress         | Function | `undefined` | ()=>{}                             | `(date_1, date_2)=>{}`   |
+| onPress         | Function | `undefined` | ()=>{}                             | `({en, fa})=>{}`         |
 | theme           | Object   |             | theme:{dark:{...},light:{...}}     |                          |
 
 ### Calendar Demo : fa (persian)
@@ -164,6 +149,153 @@ export default App;
 ### Calendar Demo render icon
 
   <img src="https://github.com/gnmjafari/react-native-multipurpose-calendar/blob/main/demo/calendar-icon.gif?raw=true" style="width: 300px; height: auto;">
+
+## Usage Agenda
+
+```javascript
+import { Agenda } from "react-native-multipurpose-calendar";
+```
+
+```javascript
+<Agenda lang themeMode events renderItemCustom fontFamily theme />
+```
+
+## Some Code Examples Agenda lang = 'fa'
+
+```javascript
+import React, { useState } from "react";
+import { Agenda } from "react-native-multipurpose-calendar";
+
+const App = () => {
+  const [events, setEvents] = useState([
+    {
+      title: "test fa",
+      date: "2024-06-21",
+    },
+  ]);
+
+  return <Agenda lang="fa" themeMode="dark" events={events} />;
+};
+
+export default App;
+```
+
+## Some Code Examples Agenda lang = 'en'
+
+```javascript
+import React, { useState } from "react";
+import { Agenda } from "react-native-multipurpose-calendar";
+
+const App = () => {
+  const [events, setEvents] = useState([
+    {
+      title: "test en",
+      date: "2024-06-21",
+    },
+  ]);
+
+  return <Agenda lang="en" themeMode="dark" events={events} />;
+};
+
+export default App;
+```
+
+## Some Code Examples Calendar Theme
+
+```javascript
+import React, { useState } from "react";
+import { calendar } from "react-native-multipurpose-calendar";
+
+const App = () => {
+  const [events, setEvents] = useState([
+    {
+      title: "test theme",
+      date: "2024-06-21",
+    },
+  ]);
+
+  return (
+    <Calendar
+      lang="en"
+      themeMode="light"
+      events={events}
+      theme={
+        dark: {
+          background: theme?.dark?.background || "rgb(29, 27, 30)",
+          onBackground: theme?.dark?.onBackground || "rgb(231, 225, 229)",
+          itemBgColor: theme?.dark?.itemBgColor || "rgb(220, 184, 255)",
+          itemTextColor: theme?.dark?.itemTextColor || "rgb(71, 12, 122)",
+          dayTextColor: theme?.dark?.dayTextColor || "rgb(231, 225, 229)",
+          buttonBgColor: theme?.dark?.buttonBgColor || "rgb(77, 67, 87)",
+          buttonTextColor: theme?.dark?.buttonTextColor || "rgb(237, 221, 246)",
+          todayTextColor: theme?.dark?.todayTextColor || "rgb(220, 184, 255)",
+          line: "rgb(74, 69, 78)",
+        },
+        light: {
+          background: theme?.light?.background || "rgb(255, 251, 255)",
+          onBackground: theme?.light?.onBackground || "rgb(29, 27, 30)",
+          itemBgColor: theme?.dark?.itemBgColor || "rgb(120, 69, 172)",
+          itemTextColor: theme?.dark?.itemTextColor || "rgb(231, 225, 229)",
+          dayTextColor: theme?.dark?.dayTextColor || "#0D1B2A",
+          buttonBgColor: theme?.dark?.buttonBgColor || "rgb(237, 221, 246)",
+          buttonTextColor: theme?.dark?.buttonTextColor || "rgb(33, 24, 42)",
+          todayTextColor: theme?.dark?.todayTextColor || "rgb(120, 69, 172)",
+          line: "rgb(233, 223, 235)",
+        },
+    }
+    />
+  );
+};
+
+export default App;
+```
+
+## Some Code Examples renderItemCustom
+
+```javascript
+import React, { useState } from "react";
+import { Agenda } from "react-native-multipurpose-calendar";
+import { View, Text } from "react-native";
+
+const App = () => {
+  const [events, setEvents] = useState([
+    {
+      title: "test en",
+      date: "2024-06-21",
+    },
+  ]);
+
+  const renderItemCustom = ({ item, index }) => {
+    return (
+      <View key={`renderItem_${index}`}>
+        <Text>{item.title}</Text>
+      </View>
+    );
+  };
+
+  return (
+    <Agenda
+      lang="en"
+      themeMode="dark"
+      events={events}
+      renderItemCustom={renderItemCustom}
+    />
+  );
+};
+
+export default App;
+```
+
+### Options Calendar
+
+| Param            | Type     | Default     | Description                        | Example                   |
+| ---------------- | -------- | ----------- | ---------------------------------- | ------------------------- |
+| lang             | String   | `en`        | Available values = `en`, `fa`      | `lang="en"`               |
+| themeMode        | String   | `dark`      | Available values = `dark`, `light` | `themeMode="light"`       |
+| fontFamily       | String   | `undefined` |                                    | `fontFamily="Montserrat"` |
+| events           | Array    | `[]`        | `"[{title:'', date:''}]"`          |                           |
+| renderItemCustom | Function | `undefined` | ()=>{}                             |                           |
+| theme            | Object   |             | theme:{dark:{...},light:{...}}     |                           |
 
 ## License
 
