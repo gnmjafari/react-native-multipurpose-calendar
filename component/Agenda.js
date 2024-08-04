@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment-jalaali";
 import {
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Calendar from "./Calendar";
 import _ from "lodash";
+import fa from "moment/src/locale/fa";
 
 const Agenda = ({
   lang = "en",
@@ -19,10 +20,14 @@ const Agenda = ({
   fontFamily,
   renderItemCustom,
 }) => {
-  moment.locale(lang);
-  if (lang == "fa") {
-    moment.loadPersian({ dialect: "persian-modern" });
-  }
+  useEffect(() => {
+    if (lang == "fa") {
+      moment.locale(lang, fa);
+      moment.loadPersian({ dialect: "persian-modern" });
+    } else {
+      moment.locale(lang);
+    }
+  }, [lang]);
 
   const setFormat = () => {
     if (lang == "fa") {
@@ -239,8 +244,12 @@ const Agenda = ({
           <View style={{ position: "absolute", top: -20 }}>
             <Calendar
               themeMode={themeMode}
-              onPress={(date1) => {
-                setSelectedDate(date1);
+              onPress={({ en, fa }) => {
+                if (lang == "fa") {
+                  setSelectedDate(fa);
+                } else {
+                  setSelectedDate(en);
+                }
               }}
               value={selectedDate}
               title="date"
