@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import moment from "moment-jalaali";
 import {
   StyleSheet,
@@ -112,15 +112,18 @@ const Agenda = ({
   fontFamily,
   renderItemCustom,
 }) => {
-  const [showAgenda, setShowaAgenda] = useState(false);
-  useEffect(() => {
+  moment.locale("fa");
+  moment.locale("en");
+
+  const checkLang = React.useMemo(() => {
     if (lang == "fa") {
-      moment.locale(lang, fa);
+      moment.updateLocale(lang, fa);
       moment.loadPersian({ dialect: "persian-modern" });
     } else {
-      moment.locale(lang);
+      moment.updateLocale(lang);
     }
-    setShowaAgenda(true);
+
+    return true;
   }, [lang]);
 
   const setFormat = () => {
@@ -332,7 +335,7 @@ const Agenda = ({
 
   return (
     <>
-      {showAgenda && (
+      {checkLang ? (
         <>
           <View style={styles.container}>
             <StatusBar />
@@ -490,6 +493,8 @@ const Agenda = ({
             />
           </View>
         </>
+      ) : (
+        <Loading color={themeCalendar[themeMode].itemBgColor} />
       )}
     </>
   );
