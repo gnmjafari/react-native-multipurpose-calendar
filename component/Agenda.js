@@ -354,12 +354,20 @@ const Agenda = ({
                     />
                   </View>
                 </View>
-                <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 5,
+                    marginLeft: 40,
+                  }}
+                >
                   <Text
                     style={{
                       color: themeCalendar[themeMode].onBackground,
                       fontSize: 20,
-                      marginLeft: 40,
+
                       fontFamily: fontFamily,
                     }}
                   >
@@ -370,6 +378,15 @@ const Agenda = ({
                         ) - 1
                       ]
                     }
+                  </Text>
+                  <Text
+                    style={{
+                      color: themeCalendar[themeMode].onBackground,
+                      fontSize: 20,
+
+                      fontFamily: fontFamily,
+                    }}
+                  >
                     {moment(selectedDate, setFormat()).format(
                       lang == "fa" ? "jYYYY" : "YYYY"
                     )}
