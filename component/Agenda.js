@@ -361,7 +361,7 @@ const Agenda = ({
           >
             {
               useLocales[lang].monthNamesShort[
-                moment().format(lang == "fa" ? "jM" : "M") - 1
+                moment(selectedDate, setFormat()).format(lang == "fa" ? "jM" : "M") - 1
               ]
             }
             {moment(selectedDate, setFormat()).format(
