@@ -1,6 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import { ActivityIndicator, StyleSheet } from "react-native";
 
 const Loading = ({ size = "large", color }) => (
   <ActivityIndicator

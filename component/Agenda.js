@@ -11,6 +11,7 @@ import {
 import Calendar from "./Calendar";
 import _ from "lodash";
 import fa from "moment/src/locale/fa";
+import Loading from "./Loading";
 
 const useLocales = {
   fa: {
