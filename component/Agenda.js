@@ -112,6 +112,7 @@ const Agenda = ({
   fontFamily,
   renderItemCustom,
 }) => {
+  const [showAgenda, setShowaAgenda] = useState(false);
   useEffect(() => {
     if (lang == "fa") {
       moment.locale(lang, fa);
@@ -119,6 +120,7 @@ const Agenda = ({
     } else {
       moment.locale(lang);
     }
+    setShowaAgenda(true);
   }, [lang]);
 
   const setFormat = () => {
@@ -330,166 +332,165 @@ const Agenda = ({
 
   return (
     <>
-      {(lang == "fa" && _.includes(moment.locales(), "fa")) ||
-        (lang == "en" && _.includes(moment.locales(), "en") && (
-          <>
-            <View style={styles.container}>
-              <StatusBar />
-              <View style={styles.headerContainer}>
-                <View>
-                  <View style={{ position: "absolute", top: -20 }}>
-                    <Calendar
-                      themeMode={themeMode}
-                      onPress={({ en, fa }) => {
-                        if (lang == "fa") {
-                          setSelectedDate(fa);
-                        } else {
-                          setSelectedDate(en);
-                        }
-                      }}
-                      value={selectedDate}
-                      title="date"
-                      lang={lang}
-                      render="icon"
-                    />
-                  </View>
+      {showAgenda && (
+        <>
+          <View style={styles.container}>
+            <StatusBar />
+            <View style={styles.headerContainer}>
+              <View>
+                <View style={{ position: "absolute", top: -20 }}>
+                  <Calendar
+                    themeMode={themeMode}
+                    onPress={({ en, fa }) => {
+                      if (lang == "fa") {
+                        setSelectedDate(fa);
+                      } else {
+                        setSelectedDate(en);
+                      }
+                    }}
+                    value={selectedDate}
+                    title="date"
+                    lang={lang}
+                    render="icon"
+                  />
                 </View>
-                <View
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 5,
+                  marginLeft: 40,
+                }}
+              >
+                <Text
                   style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 5,
-                    marginLeft: 40,
+                    color: themeCalendar[themeMode].onBackground,
+                    fontSize: 20,
+
+                    fontFamily: fontFamily,
+                  }}
+                >
+                  {
+                    useLocales[lang].monthNamesShort[
+                      moment(selectedDate, setFormat()).format(
+                        lang == "fa" ? "jM" : "M"
+                      ) - 1
+                    ]
+                  }
+                </Text>
+                <Text
+                  style={{
+                    color: themeCalendar[themeMode].onBackground,
+                    fontSize: 20,
+
+                    fontFamily: fontFamily,
+                  }}
+                >
+                  {moment(selectedDate, setFormat()).format(
+                    lang == "fa" ? "jYYYY" : "YYYY"
+                  )}
+                </Text>
+              </View>
+              <View style={styles.headerBtnBox}>
+                <TouchableOpacity
+                  style={{
+                    paddingHorizontal: 15,
+                    paddingVertical: 5,
+                    borderRadius: 5,
+                    backgroundColor: themeCalendar[themeMode].buttonBgColor,
+                  }}
+                  onPress={() => {
+                    const date = moment(selectedDate, setFormat()).format(
+                      "YYYY-MM-DD"
+                    );
+                    const startDate = moment(date)
+                      .startOf(lang == "fa" ? "jMonth" : "month")
+                      .format("YYYY-MM-DD");
+
+                    setSelectedDate(
+                      moment(startDate)
+                        .subtract(1, lang == "fa" ? "jMonth" : "month")
+                        .format(lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD")
+                    );
                   }}
                 >
                   <Text
                     style={{
-                      color: themeCalendar[themeMode].onBackground,
-                      fontSize: 20,
-
+                      color: themeCalendar[themeMode].buttonTextColor,
                       fontFamily: fontFamily,
                     }}
                   >
-                    {
-                      useLocales[lang].monthNamesShort[
-                        moment(selectedDate, setFormat()).format(
-                          lang == "fa" ? "jM" : "M"
-                        ) - 1
-                      ]
-                    }
+                    {lang == "fa" ? "قبل" : "Prev"}
                   </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    paddingHorizontal: 15,
+                    paddingVertical: 5,
+                    borderRadius: 5,
+                    backgroundColor: themeCalendar[themeMode].buttonBgColor,
+                  }}
+                  onPress={() => {
+                    setSelectedDate(moment().format(setFormat()));
+                  }}
+                >
                   <Text
                     style={{
-                      color: themeCalendar[themeMode].onBackground,
-                      fontSize: 20,
-
+                      color: themeCalendar[themeMode].buttonTextColor,
                       fontFamily: fontFamily,
                     }}
                   >
-                    {moment(selectedDate, setFormat()).format(
-                      lang == "fa" ? "jYYYY" : "YYYY"
-                    )}
+                    {lang == "fa" ? "امروز" : "today"}
                   </Text>
-                </View>
-                <View style={styles.headerBtnBox}>
-                  <TouchableOpacity
-                    style={{
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      borderRadius: 5,
-                      backgroundColor: themeCalendar[themeMode].buttonBgColor,
-                    }}
-                    onPress={() => {
-                      const date = moment(selectedDate, setFormat()).format(
-                        "YYYY-MM-DD"
-                      );
-                      const startDate = moment(date)
-                        .startOf(lang == "fa" ? "jMonth" : "month")
-                        .format("YYYY-MM-DD");
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    paddingHorizontal: 15,
+                    paddingVertical: 5,
+                    borderRadius: 5,
+                    backgroundColor: themeCalendar[themeMode].buttonBgColor,
+                  }}
+                  onPress={() => {
+                    const date = moment(selectedDate, setFormat()).format(
+                      "YYYY-MM-DD"
+                    );
 
-                      setSelectedDate(
-                        moment(startDate)
-                          .subtract(1, lang == "fa" ? "jMonth" : "month")
-                          .format(lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD")
-                      );
+                    const startDate = moment(date)
+                      .locale("en")
+                      .startOf(lang == "fa" ? "jMonth" : "month")
+                      .format("YYYY-MM-DD");
+
+                    setSelectedDate(
+                      moment(startDate)
+                        .add(1, lang == "fa" ? "jMonth" : "month")
+                        .format(lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD")
+                    );
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: themeCalendar[themeMode].buttonTextColor,
+                      fontFamily: fontFamily,
                     }}
                   >
-                    <Text
-                      style={{
-                        color: themeCalendar[themeMode].buttonTextColor,
-                        fontFamily: fontFamily,
-                      }}
-                    >
-                      {lang == "fa" ? "قبل" : "Prev"}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      borderRadius: 5,
-                      backgroundColor: themeCalendar[themeMode].buttonBgColor,
-                    }}
-                    onPress={() => {
-                      setSelectedDate(moment().format(setFormat()));
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: themeCalendar[themeMode].buttonTextColor,
-                        fontFamily: fontFamily,
-                      }}
-                    >
-                      {lang == "fa" ? "امروز" : "today"}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
-                      paddingHorizontal: 15,
-                      paddingVertical: 5,
-                      borderRadius: 5,
-                      backgroundColor: themeCalendar[themeMode].buttonBgColor,
-                    }}
-                    onPress={() => {
-                      const date = moment(selectedDate, setFormat()).format(
-                        "YYYY-MM-DD"
-                      );
-
-                      const startDate = moment(date)
-                        .locale("en")
-                        .startOf(lang == "fa" ? "jMonth" : "month")
-                        .format("YYYY-MM-DD");
-
-                      setSelectedDate(
-                        moment(startDate)
-                          .add(1, lang == "fa" ? "jMonth" : "month")
-                          .format(lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD")
-                      );
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color: themeCalendar[themeMode].buttonTextColor,
-                        fontFamily: fontFamily,
-                      }}
-                    >
-                      {lang == "fa" ? "بعد" : "Next"}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                    {lang == "fa" ? "بعد" : "Next"}
+                  </Text>
+                </TouchableOpacity>
               </View>
-
-              <FlatList
-                data={getDaysBetweenDates(selectedDate)}
-                renderItem={renderDay}
-                keyExtractor={(item) => item.agenda_id}
-                numColumns={1}
-                // contentContainerStyle={styles.container}
-              />
             </View>
-          </>
-        ))}
+
+            <FlatList
+              data={getDaysBetweenDates(selectedDate)}
+              renderItem={renderDay}
+              keyExtractor={(item) => item.agenda_id}
+              numColumns={1}
+              // contentContainerStyle={styles.container}
+            />
+          </View>
+        </>
+      )}
     </>
   );
 };
