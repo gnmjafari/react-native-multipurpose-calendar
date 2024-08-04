@@ -113,15 +113,12 @@ const Agenda = ({
   fontFamily,
   renderItemCustom,
 }) => {
-  moment.locale("fa");
-  moment.locale("en");
-
   const checkLang = React.useMemo(() => {
     if (lang == "fa") {
-      moment.updateLocale(lang, fa);
+      moment.locale(lang, fa);
       moment.loadPersian({ dialect: "persian-modern" });
     } else {
-      moment.updateLocale(lang);
+      moment.locale(lang);
     }
 
     return true;
