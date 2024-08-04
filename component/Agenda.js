@@ -12,6 +12,98 @@ import Calendar from "./Calendar";
 import _ from "lodash";
 import fa from "moment/src/locale/fa";
 
+const useLocales = {
+  fa: {
+    monthNames: [
+      "فروردین",
+      "اردیبهشت",
+      "خرداد",
+      "تیر",
+      "مرداد",
+      "شهریور",
+      "مهر",
+      "آبان",
+      "آذر",
+      "دی",
+      "بهمن",
+      "اسفند",
+    ],
+    monthNamesShort: [
+      "فروردین",
+      "اردیبهشت",
+      "خرداد",
+      "تیر",
+      "مرداد",
+      "شهریور",
+      "مهر",
+      "آبان",
+      "آذر",
+      "دی",
+      "بهمن",
+      "اسفند",
+    ],
+    dayNames: [
+      "شنبه",
+      "یکشنبه",
+      "دوشنبه",
+      "سه‌شنبه",
+      "چهارشنبه",
+      "پنجشنبه",
+      "جمعه",
+    ],
+    dayNamesShort: [
+      "شنبه",
+      "یکشنبه",
+      "دوشنبه",
+      "سه‌شنبه",
+      "چهارشنبه",
+      "پنجشنبه",
+      "جمعه",
+    ],
+  },
+  en: {
+    monthNames: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+
+    monthNamesShort: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    dayNames: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+    dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  },
+};
+
 const Agenda = ({
   lang = "en",
   themeMode = "dark",
@@ -267,8 +359,13 @@ const Agenda = ({
               fontFamily: fontFamily,
             }}
           >
+            {
+              useLocales[lang].monthNamesShort[
+                moment().format(lang == "fa" ? "jM" : "M") - 1
+              ]
+            }
             {moment(selectedDate, setFormat()).format(
-              lang == "fa" ? "jMMMM jYYYY" : "MMMM YYYY"
+              lang == "fa" ? "jYYYY" : "YYYY"
             )}
           </Text>
         </View>
