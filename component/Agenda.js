@@ -113,6 +113,9 @@ const Agenda = ({
   fontFamily,
   renderItemCustom,
 }) => {
+  const eventsMemo = React.useMemo(() => {
+    return events;
+  }, [events]);
   const checkLang = React.useMemo(() => {
     if (lang == "fa") {
       moment.locale(lang, fa);
@@ -211,14 +214,16 @@ const Agenda = ({
 
     for (let i = 0; i < 32; i += 1) {
       const dateAdd = moment(startDate).add(i, "day").format("YYYY-MM-DD");
+
       const filterEvents = _.filter(
-        events,
-        (item) =>
-          item.date == dateAdd && {
-            ...item,
-            child_id: `child_id_${i}_${item.id}`,
-          }
+        eventsMemo,
+        (item) => item.date === dateAdd
       );
+
+      const mapFilterData = _.map(filterEvents, (item) => ({
+        ...item,
+        child_id: `child_id_${i}_${item.id}`,
+      }));
 
       daysArray.push({
         agenda_id: `agenda_id_${i}`,
@@ -226,7 +231,7 @@ const Agenda = ({
         month: moment(startDate).add(i, "day").format("MM"),
         day: moment(startDate).add(i, "day").format("DD"),
         year: moment(startDate).add(i, "day").format("YYYY"),
-        child: filterEvents,
+        child: mapFilterData,
       });
     }
 
@@ -309,14 +314,16 @@ const Agenda = ({
               {moment(item.dateString).format(lang == "fa" ? "dddd" : "ddd")}
             </Text>
           </View>
-          <FlatList
-            data={item.child}
-            renderItem={renderItem}
-            keyExtractor={(item) => `${item.agenda_id}_renderItem`}
-            numColumns={1}
-            contentContainerStyle={{ width: "100%" }}
-            style={{ width: "70%" }}
-          />
+          {item.child && item.child.length > 0 && (
+            <FlatList
+              data={item.child}
+              renderItem={renderItem}
+              keyExtractor={(item) => `${item.child_id}_renderItem`}
+              numColumns={1}
+              contentContainerStyle={{ width: "100%" }}
+              style={{ width: "70%" }}
+            />
+          )}
         </View>
         <View
           style={{

@@ -279,6 +279,7 @@ const Calendar = ({
               : themeCalendar[themeMode].background,
           }}
           onPress={() => {
+            setShow(false);
             setCalendarValue(
               moment(item.dateString).format(
                 lang == "fa" ? "jYYYY-jMM-jDD" : "YYYY-MM-DD"
